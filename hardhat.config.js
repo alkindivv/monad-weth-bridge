@@ -1,30 +1,16 @@
-require("@nomiclabs/hardhat-ethers");
+require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const INFURA_PROJECT_ID = process.env.INFURA_PROJECT_ID;
-
 module.exports = {
-  solidity: {
-    version: "0.8.19",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
-    },
-  },
+  solidity: "0.8.19",
   networks: {
     sepolia: {
-      url: `https://sepolia.infura.io/v3/${INFURA_PROJECT_ID}`,
-      accounts: [PRIVATE_KEY],
-      chainId: 11155111,
+      url: `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
+      accounts: [process.env.PRIVATE_KEY],
     },
     monad: {
-      url: "https://testnet-rpc.monad.xyz/",
-      chainId: 10143,
-      accounts: [PRIVATE_KEY],
-      timeout: 60000,
+      url: process.env.MONAD_RPC_URL,
+      accounts: [process.env.PRIVATE_KEY],
     },
   },
 };
