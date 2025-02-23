@@ -1,19 +1,26 @@
 const { ethers } = require("hardhat");
 
 async function unlockTokens() {
-  const bridgeAddress = "0x2DfeB255305813A2162DC81c3E73eDd2e5Ff97eC";
+  const bridgeAddress = "0x3d759d650c81C5979B7B5EA493E75cB6b257658A"; // Update dengan hasil deploy Monad
   const amount = ethers.utils.parseEther("0.01");
   const [signer] = await ethers.getSigners();
 
+  console.log("Unlocking tokens...");
   const bridge = await ethers.getContractAt(
     "AdvancedWETHBridge",
     bridgeAddress
   );
-  await bridge.unlockTokens(
+
+  const tx = await bridge.unlockTokens(
     signer.address,
     amount,
-    "0x54d788607e4f2164e857afe3bd84592f1fd7339369d6ab287137033eb31e3d56"
+    "0xacf01b0b0e012677527bd018bb817c08a443bbe942cc0e789913c2cf1b9c3316",
+    {
+      gasLimit: 500000,
+    }
   );
+  await tx.wait();
+  console.log("Tokens unlocked! Check your MON balance.");
 }
 
 unlockTokens()

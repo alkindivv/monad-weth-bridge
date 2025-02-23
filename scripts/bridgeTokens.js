@@ -2,7 +2,7 @@ const { ethers } = require("hardhat");
 
 async function bridgeTokens() {
   const amount = ethers.utils.parseEther("0.01");
-  const bridgeAddress = "0xAB7A526f5890d4fe0CbF8CE6DE3b6521b9091Fc6";
+  const bridgeAddress = "0x55c7B89Bef52E4E572F948642FbFa5Cad49b873D"; // Update dengan hasil deploy Sepolia
 
   // Get WETH contract
   const weth = await ethers.getContractAt(
